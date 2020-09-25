@@ -12,10 +12,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("scheduling-simulator.fxml"));
         primaryStage.setTitle("Scheduling Simulator");
-        primaryStage.setScene(new Scene(root, 800, 500));
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
