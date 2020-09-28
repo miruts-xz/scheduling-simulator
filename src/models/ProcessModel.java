@@ -1,5 +1,6 @@
 package models;
 
+// Represents a single process
 public class ProcessModel {
     private int processNumber;
     private int burstTime;

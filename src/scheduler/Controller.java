@@ -10,7 +10,7 @@ import models.ProcessModel;
 import utils.SchedulingHelper;
 
 import java.util.ArrayList;
-
+// Java FX Controller class
 public class Controller {
     public Button addProcessButton;
 

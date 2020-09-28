@@ -6,6 +6,7 @@ import models.AdvancedProcessModel;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+// Scheduling algorithm implementions
 public class SchedulingHelper {
     // implements shortest job first algorithm
 
@@ -34,6 +35,7 @@ public class SchedulingHelper {
         return processModelsClone.get(minIndex);
     }
 
+    // Method for Shortest Job First algorithm
     public static ArrayList<ProcessModel> shortestJobFirst(ArrayList<ProcessModel> processes) {
         ArrayList<ProcessModel> executionOrder = getSJFOrder(processes);
         executionOrder.get(0).setWaitingTime(0);
@@ -45,6 +47,7 @@ public class SchedulingHelper {
         return executionOrder;
     }
 
+    // Method for First Come First Served Algorithm
     public static ArrayList<ProcessModel> firstComeFirstServe(ArrayList<ProcessModel> processes) {
         processes.sort(Comparator.comparingInt(ProcessModel::getArrivalTime));
 
@@ -67,6 +70,7 @@ public class SchedulingHelper {
         return processes;
     }
 
+    // Method for Round Robin algorithm
     public static ArrayList<ProcessModel> roundRobin(ArrayList<ProcessModel> processes, int timeQuantum) {
 
         ArrayList<AdvancedProcessModel> executingList = new ArrayList<>();
@@ -128,6 +132,7 @@ public class SchedulingHelper {
         return processes.get(index);
     }
 
+    // Algorithm for Priority Scheduling
     public static ArrayList<ProcessModel> priorityScheduling(ArrayList<ProcessModel> processes) {
         processes.sort(Comparator.comparingInt(ProcessModel::getPriority));
         processes.get(0).setWaitingTime(0);
@@ -141,6 +146,7 @@ public class SchedulingHelper {
         return processes;
     }
 
+    // Method for Shortest Job First Preemptive (Shortest Remaining Time first)
     public static ArrayList<ProcessModel> shortestJobFirstPreemptive(ArrayList<ProcessModel> processes) {
         processes.sort(Comparator.comparingInt(ProcessModel::getArrivalTime));
 
@@ -194,6 +200,9 @@ public class SchedulingHelper {
         return pList;
     }
 
+    /*
+    * Other methods are helper methods for the main Scheduling algorithm methods
+    * */
     private static int getTurnaroundTime(AdvancedProcessModel sjp, ArrayList<AdvancedProcessModel> executingProcessList) {
         int tat = 0;
         AdvancedProcessModel last = sjp;

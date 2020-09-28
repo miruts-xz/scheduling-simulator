@@ -5,12 +5,14 @@ public class AdvancedProcessModel {
     int startedExecuting;
     int endedExecuting;
 
+    // Constructor
     public AdvancedProcessModel(ProcessModel process, int startedExecuting, int endedExecuting) {
         this.process = process;
         this.startedExecuting = startedExecuting;
         this.endedExecuting = endedExecuting;
     }
 
+    /*Getters and setters*/
     public ProcessModel getProcess() {
         return process;
     }
