@@ -12,6 +12,14 @@ public class ProcessModel {
     private int remainingTime;
     private int priority;
 
+    @Override
+    protected ProcessModel clone() throws CloneNotSupportedException {
+        super.clone();
+        ProcessModel clone = new ProcessModel(this.burstTime, this.processName, this.arrivalTime);
+        clone.setPriority(this.priority);
+        return clone;
+    }
+
     public ProcessModel(int burstTime, String processName, int arrivalTime) {
         this.burstTime = burstTime;
         this.processName = processName;

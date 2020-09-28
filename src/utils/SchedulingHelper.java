@@ -197,6 +197,9 @@ public class SchedulingHelper {
             pr.setTurnaroundTime(getTurnaroundTime(sjp, executingProcessList));
             pList.add(pr);
         }
+        if(!(pList.size()>0)){
+            return processes;
+        }
         return pList;
     }
 

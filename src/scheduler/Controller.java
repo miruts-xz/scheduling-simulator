@@ -10,11 +10,14 @@ import models.ProcessModel;
 import utils.SchedulingHelper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+
 // Java FX Controller class
 public class Controller {
     public Button addProcessButton;
 
     public ArrayList<ProcessModel> processes = new ArrayList<>();
+    public ArrayList<ProcessModel> processesClone = new ArrayList<>();
     public TextField burstTime;
     public Button simulateButton;
     public ComboBox<AlgorithmType> algorithmType;
@@ -69,7 +72,6 @@ public class Controller {
 
     }
 
-
     @FXML
     private void simulate() {
         AlgorithmType algorithmType = this.algorithmType.getSelectionModel().getSelectedItem();
@@ -95,13 +97,14 @@ public class Controller {
                 simulationTable.getItems().setAll(simulations);
                 break;
             case SJFP:
-                simulations = SchedulingHelper.shortestJobFirstPreemptive(processes);
+                simulations = SchedulingHelper.shortestJobFirstPreemptive(processesClone);
                 averageWT.setText(String.valueOf(getAverageWaiting(simulations)));
                 AverageTAT.setText(String.valueOf(getAverageTurnaround(simulations)));
                 simulationTable.getItems().setAll(simulations);
                 break;
             case PS:
-                simulations = SchedulingHelper.priorityScheduling(processes);
+                ArrayList<ProcessModel> clonedProcessesps = new ArrayList<>(processes);
+                simulations = SchedulingHelper.priorityScheduling(clonedProcessesps);
                 averageWT.setText(String.valueOf(getAverageWaiting(simulations)));
                 AverageTAT.setText(String.valueOf(getAverageTurnaround(simulations)));
                 simulationTable.getItems().setAll(simulations);
@@ -150,13 +153,17 @@ public class Controller {
         int currentQuantity = processTable.getItems().size();
 
         ProcessModel processModel;
-
+        ProcessModel processModelClone;
         try {
             processModel = new ProcessModel(Integer.parseInt(burstTime.getText()), processName.getText(), Integer.parseInt(arrivalTime.getText()));
             processModel.setPriority(Integer.parseInt(priority.getText()));
             processModel.setProcessNumber(currentQuantity);
             processTable.getItems().add(processModel);
             processes.add(processModel);
+            processModelClone = new ProcessModel(Integer.parseInt(burstTime.getText()), processName.getText(), Integer.parseInt(arrivalTime.getText()));
+            processModelClone.setPriority(Integer.parseInt(priority.getText()));
+            processModelClone.setProcessNumber(currentQuantity);
+            processesClone.add(processModelClone);
             System.out.println(processes);
 
         } catch (Exception e) {
@@ -164,6 +171,7 @@ public class Controller {
         }
 
     }
+
     @FXML
     public void onReset(ActionEvent actionEvent) {
         processes.clear();
